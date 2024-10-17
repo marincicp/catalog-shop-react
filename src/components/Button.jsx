@@ -4,7 +4,8 @@ function Button({ children, type = "primary", className = "" }) {
 
   const styles = {
     primary:
-      " bg-white border-2 border-gray-200 text-gray-900 font-semibold hover:bg-gray-200 ",
+      " bg-white border-2 border-gray-200 text-gray-900 font-semibold hover:bg-gray-300 ",
+    secondary: " bg-green-600 text-white  font-semibold hover:bg-green-700",
   };
 
   return (

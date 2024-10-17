@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 function NavLinkItem({ to, label }) {
   return (
-    <li className="px-4 py-2 text-base font-semibold uppercase tracking-wide  ">
+    <li className="px-4 py-2 text-base font-semibold tracking-wider">
       <NavLink
         to={to}
         className={({ isActive }) =>

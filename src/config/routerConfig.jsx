@@ -1,11 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
 import { AppLayout } from "../components";
 import { About, Catalog, ProductDetails } from "../pages";
+import { ProductContextProvider } from "../context/ProductContext";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <AppLayout />,
+    element: (
+      <ProductContextProvider>
+        <AppLayout />
+      </ProductContextProvider>
+    ),
     children: [
       {
         path: "/",
