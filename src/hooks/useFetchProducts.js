@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import useQueryParams from "./UseQueryParams";
 import { BASE_URL } from "../config/config";
+import useQueryParams from "./UseQueryParams";
 
 export default function useFetchProducts() {
   const [products, setProducts] = useState([]);

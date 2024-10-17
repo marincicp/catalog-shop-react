@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useSearchParams } from "react-router-dom";
-import { paramsConstants } from "../constants/constants";
+import { paramsConstants, productTypes } from "../constants/constants";
 
 export default function useQueryParams() {
   const timeoutID = useRef(null);
@@ -47,6 +47,21 @@ export default function useQueryParams() {
     }, 1000);
   }
 
+  function handleSelectType(type) {
+    const currentType = getQueryParam(paramsConstants.TYPE);
+
+    if (!currentType || currentType !== type) {
+      return setQueryParam(paramsConstants.TYPE, type);
+    }
+
+    if (
+      currentType === productTypes.VIRTUAL ||
+      currentType === productTypes.PHYSICAL
+    ) {
+      return deleteQueryParam(paramsConstants.TYPE);
+    }
+  }
+
   return {
     deleteQueryParam,
     searchParams,
@@ -54,5 +69,6 @@ export default function useQueryParams() {
     handleCategoryDropdown,
     handleInputChange,
     getQueryParam,
+    handleSelectType,
   };
 }

@@ -9,7 +9,6 @@ export function ProductContextProvider({ children }) {
 
   const { products, isLoading, error } = useFetchProducts();
 
-  console.log(isLoading, "isLoading");
   useEffect(() => {
     async function getData() {
       const res = await fetch(`${BASE_URL}/categories`);
@@ -20,7 +19,7 @@ export function ProductContextProvider({ children }) {
     getData();
   }, []);
   return (
-    <ProductContext.Provider value={{ categories, products, error }}>
+    <ProductContext.Provider value={{ categories, products, error, isLoading }}>
       {children}
     </ProductContext.Provider>
   );

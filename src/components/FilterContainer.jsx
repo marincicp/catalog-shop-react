@@ -1,21 +1,27 @@
-import Button from "./Button";
+import { paramsConstants } from "../constants/constants";
+import { useProducts, useQueryParams } from "../hooks";
 import Dropdown from "./Dropdown";
 import FilterCard from "./FilterCard";
+import SelectProductType from "./SelectProductType";
 
 function FilterContainer() {
+  const { handleCategoryDropdown, handleSelectType, getQueryParam } =
+    useQueryParams();
+  const { categories } = useProducts();
+  const activeType = getQueryParam(paramsConstants.TYPE);
   return (
     <div className="bg-white">
       <div>
         <FilterCard title="Filter" titleSize="large" />
         <FilterCard title="Categories">
-          <Dropdown />
+          <Dropdown onChange={handleCategoryDropdown} data={categories} />
         </FilterCard>
 
         <FilterCard title="Type">
-          <div>
-            <Button className="mr-4">Virtual</Button>
-            <Button>Physical</Button>
-          </div>
+          <SelectProductType
+            active={activeType}
+            handleSelectType={handleSelectType}
+          />
         </FilterCard>
         <FilterCard title="Price">
           <div className="flex gap-4 justify-center items-center w-full">

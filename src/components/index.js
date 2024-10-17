@@ -10,7 +10,7 @@ import ProductList from "./ProductList";
 import ProductCard from "./ProductCard";
 import Button from "./Button";
 import Dropdown from "./Dropdown";
-
+import SelectProductType from "./SelectProductType";
 export {
   Button,
   ProductList,
@@ -24,4 +24,5 @@ export {
   NavLinkItem,
   ProductCard,
   Dropdown,
+  SelectProductType,
 };
