@@ -3,7 +3,7 @@ import ProductPlaceholder from "../../public/productImgPlacehodler.jpg";
 
 function ProductCard({ item }) {
   return (
-    <div className=" w-full rounded-xl p-6 flex flex-col justify-between  items-center gap-4 border-2 border-gray-200 hover:shadow-md transition-all duration-200 ">
+    <div className=" max-h-80 w-full rounded-xl p-6 flex flex-col justify-between  items-center gap-4 border-2 border-gray-200 hover:shadow-md transition-all duration-200 ">
       <div className="w-40 h-40 overflow-hidden rounded-lg">
         <img
           className="object-cover w-full h-full"
