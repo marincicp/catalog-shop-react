@@ -1,6 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import { AppLayout } from "../components";
-import { About, Catalog, ProductDetails } from "../pages";
+import {
+  About,
+  Catalog,
+  ProductCreate,
+  ProductDetails,
+  ProductEdit,
+} from "../pages";
 import { ProductContextProvider } from "../context/ProductContext";
 
 export const router = createBrowserRouter([
@@ -22,8 +28,16 @@ export const router = createBrowserRouter([
         element: <About />,
       },
       {
+        path: "/product-create",
+        element: <ProductCreate />,
+      },
+      {
         path: "/product/:sku",
         element: <ProductDetails />,
+      },
+      {
+        path: "/product-edit/:sku",
+        element: <ProductEdit />,
       },
     ],
   },
