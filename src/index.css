@@ -12,6 +12,6 @@ body {
   font-family: sans-serif;
 }
 
-/* input["range"]::-webkit-slider-thumb {
-  background: red;
-} */
+::-webkit-scrollbar {
+  display: none;
+}

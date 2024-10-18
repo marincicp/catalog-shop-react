@@ -8,9 +8,9 @@ function Catalog() {
   const lastSearchQuery = getQueryParam("name") || "";
 
   return (
-    <div className="bg-red-400 h-full grid grid-cols-[20%_1fr]">
+    <div className="grid  grid-cols-[40%_1fr] md:grid-cols-[30%_1fr]  lg:grid-cols-[30%_1fr] xl:grid-cols-[20%_1fr]  ">
       <FilterContainer />
-      <div className="bg-white border-l-2 border-l-gray-100 flex gap-4 flex-col justify-start items-center p-8 overflow-hidden">
+      <div className="bg-white border-l-2 border-l-gray-100 flex gap-4 flex-col justify-start items-center p-8">
         <div className="w-full flex justify-center items-start ">
           <SearchBar
             lastSearchQuery={lastSearchQuery}
