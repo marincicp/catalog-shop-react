@@ -1,11 +1,11 @@
 import { useRef } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { paramsConstants, productTypes } from "../constants/constants";
 
 export default function useQueryParams() {
   const timeoutID = useRef(null);
   const [searchParams, setSearchParams] = useSearchParams();
-
+  const navigate = useNavigate();
   function setQueryParam(param, value) {
     setSearchParams(
       (prev) => {
@@ -47,6 +47,28 @@ export default function useQueryParams() {
     }, 1000);
   }
 
+  function clearAllParms() {
+    navigate("/", { replace: true });
+  }
+
+  function handlePriceFilter(value, type) {
+    const currentType = getQueryParam(paramsConstants.PRICE[type]);
+
+    const minPrice = getQueryParam(paramsConstants.PRICE.MIN);
+    const maxPrice = getQueryParam(paramsConstants.PRICE.MAX);
+
+    if (maxPrice && minPrice === maxPrice) {
+      return deleteQueryParam(paramsConstants.PRICE.MAX);
+    }
+
+    if (!currentType || currentType === type) {
+      if (value === "0") {
+        return deleteQueryParam(type);
+      }
+
+      return setQueryParam(type, value);
+    }
+  }
   function handleSelectType(type) {
     const currentType = getQueryParam(paramsConstants.TYPE);
 
@@ -70,5 +92,7 @@ export default function useQueryParams() {
     handleInputChange,
     getQueryParam,
     handleSelectType,
+    handlePriceFilter,
+    clearAllParms,
   };
 }
