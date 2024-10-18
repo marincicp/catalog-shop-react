@@ -9,7 +9,6 @@ function ProductCard({ item }) {
           className="object-cover w-full h-full"
           src={item?.image_url}
           onError={(e) => {
-            // console.log(e);
             e.target.onerror = null;
             e.target.src = ProductPlaceholder;
           }}

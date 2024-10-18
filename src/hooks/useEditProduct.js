@@ -56,6 +56,7 @@ export default function useEditProduct() {
   const { sku } = useParams();
   const [categoryId, setCategoryId] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+
   function handleChange(e) {
     dispatch({
       type: "UPDATE",
@@ -75,7 +76,6 @@ export default function useEditProduct() {
           throw new Error("Product not found");
         }
 
-        console.log(data, "dataaaa");
         dispatch({ type: "SET_PRODUCT", payload: data });
       } catch (err) {
         toast.error(err.message);
@@ -109,10 +109,8 @@ export default function useEditProduct() {
       payload.shipping_price = state.shippingPrice;
       payload.color = state.color;
     }
-    console.log(payload);
 
     try {
-      console.log(payload, "payload");
       const res = await fetch(`${BASE_URL}/products/${sku}`, {
         method: "PUT",
         headers: {

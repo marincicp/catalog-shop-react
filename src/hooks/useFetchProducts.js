@@ -10,6 +10,7 @@ export default function useFetchProducts() {
   const abortControllerRef = useRef(null);
   const { searchParams } = useQueryParams();
   const location = useLocation();
+
   async function fetchProducts() {
     setError(null);
     abortControllerRef.current?.abort();
