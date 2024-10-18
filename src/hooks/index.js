@@ -1,4 +1,5 @@
 import useProducts from "./useProducts";
 import useQueryParams from "./UseQueryParams";
-
-export { useQueryParams, useProducts };
+import useCreateProduct from "./useCreateProduct";
+import useEditProduct from "./useEditProduct";
+export { useQueryParams, useProducts, useCreateProduct, useEditProduct };
