@@ -11,7 +11,16 @@ import ProductCard from "./ProductCard";
 import Button from "./Button";
 import Dropdown from "./Dropdown";
 import SelectProductType from "./SelectProductType";
+import TextInput from "./TextInput";
+import TextareaInput from "./TextareaInput";
+import RadioInput from "./RadioInput";
+import ProductForm from "./ProductForm";
+import ProductDetailCard from "./ProductDetailCard";
 export {
+  ProductForm,
+  RadioInput,
+  TextareaInput,
+  TextInput,
   Button,
   ProductList,
   AppLayout,
@@ -25,4 +34,5 @@ export {
   ProductCard,
   Dropdown,
   SelectProductType,
+  ProductDetailCard,
 };
