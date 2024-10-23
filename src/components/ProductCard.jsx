@@ -1,5 +1,6 @@
 import Button from "./Button";
 import ProductPlaceholder from "../../public/productImgPlacehodler.jpg";
+import { BASE_URL } from "../config/config";
 
 function ProductCard({ item }) {
   return (
@@ -7,7 +8,7 @@ function ProductCard({ item }) {
       <div className="w-40 h-40 overflow-hidden rounded-lg">
         <img
           className="object-cover w-full h-full"
-          src={item?.image_url}
+          src={`${BASE_URL}/${item?.image_url}`}
           onError={(e) => {
             e.target.onerror = null;
             e.target.src = ProductPlaceholder;

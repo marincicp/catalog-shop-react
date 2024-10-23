@@ -1,12 +1,4 @@
-function TextInput({
-  type = "text",
-  label,
-  name,
-  className = "",
-  value,
-  onChange,
-  ...props
-}) {
+function TextInput({ type = "text", label, name, className = "", ...props }) {
   return (
     <div className="flex gap-1 flex-col  p-4">
       {label ?? (
@@ -16,8 +8,6 @@ function TextInput({
       )}
 
       <input
-        onChange={onChange}
-        value={value}
         type={type}
         {...props}
         name={name}

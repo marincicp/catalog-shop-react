@@ -8,7 +8,7 @@ function TextareaInput({
   ...props
 }) {
   return (
-    <div className="space-y-2 flex gap-2 flex-col  p-4">
+    <div className="space-y-2 flex  gap-2 flex-col  p-4">
       {label ?? <label htmlFor={name}>{label}</label>}
 
       <textarea
@@ -16,7 +16,7 @@ function TextareaInput({
         value={value}
         id={id}
         name={name}
-        className={`w-full rounded px-5 py-2  bg-white ${className}`}
+        className={`w-full min-h-36 rounded px-5 py-2  bg-white ${className}`}
       >
         {children}
       </textarea>

@@ -7,18 +7,17 @@ import {
 } from "../components";
 
 function ProductForm({
-  handleChange,
-  state,
   handleSubmit,
   handleCategoryChange,
   categories,
-  isLoading,
+  productType,
+  productData = null,
+  handleProductType,
 }) {
   return (
     <form
       className="mt-4 w-full flex flex-col items-center gap-4 bg-gray-100"
       onSubmit={handleSubmit}
-      encType="multipart/form-data"
     >
       <div className="flex w-full gap-8">
         <div className=" flex-1">
@@ -26,39 +25,31 @@ function ProductForm({
             label="Name"
             name="name"
             id="name"
-            value={state.name}
-            onChange={handleChange}
-          />
-          <TextInput
-            label="SKU"
-            name="sku"
-            id="sku"
-            value={state.sku}
-            onChange={handleChange}
+            defaultValue={productData?.name}
           />
 
-          <TextInput
-            type="file"
-            label="Image"
-            name="imageUrl"
-            id="imageUrl"
-            value={state.imageUrl}
-            onChange={handleChange}
-          />
-
+          {!productData && (
+            <>
+              <TextInput label="SKU" name="sku" id="sku" />
+              <TextInput
+                type="file"
+                label="Image"
+                name="image_url"
+                id="imageUrl"
+              />
+            </>
+          )}
           <TextInput
             label="Price"
             type="number"
             name="price"
             id="price"
-            value={state.price}
-            onChange={handleChange}
+            defaultValue={productData?.price || ""}
           />
           <TextareaInput
             label="Description"
-            value={state.description}
             name="description"
-            onChange={handleChange}
+            defaultValue={productData?.description || ""}
           ></TextareaInput>
         </div>
 
@@ -79,8 +70,8 @@ function ProductForm({
               label="Virtual"
               value="virtual"
               name="productType"
-              checked={state.productType === "virtual"}
-              onChange={handleChange}
+              checked={productType === "virtual"}
+              onChange={() => handleProductType("virtual")}
             />
 
             <RadioInput
@@ -88,43 +79,39 @@ function ProductForm({
               label="Physical"
               value="physical"
               name="productType"
-              checked={state.productType === "physical"}
-              onChange={handleChange}
+              checked={productType === "physical"}
+              onChange={() => handleProductType("physical")}
             />
 
-            {state.productType === "virtual" ? (
+            {productType === "virtual" ? (
               <>
                 <TextInput
                   label="Coupon Code"
-                  name="couponCode"
+                  name="coupon_code"
                   id="couponCode"
-                  onChange={handleChange}
-                  value={state.couponCode}
+                  defaultValue={productData?.coupon_code || ""}
                 />
                 <TextInput
                   type="date"
                   label="Expires At"
-                  name="expiresAt"
+                  name="expires_at"
                   id="expires_at"
-                  value={state.expiresAt}
-                  onChange={handleChange}
+                  defaultValue={productData?.expires_at || ""}
                 />
               </>
             ) : (
               <>
                 <TextInput
                   label="Shipping Price"
-                  name="shippingPrice"
-                  onChange={handleChange}
+                  name="shipping_price"
+                  defaultValue={productData?.shipping_price || ""}
                   id="shippingPrice"
-                  value={state.shippingPrice}
                 />
                 <TextInput
                   label="Color"
                   name="color"
+                  defaultValue={productData?.color || ""}
                   id="color"
-                  value={state.color}
-                  onChange={handleChange}
                 />
               </>
             )}
@@ -132,9 +119,7 @@ function ProductForm({
         </div>
       </div>
       <div className="">
-        <Button disabled={isLoading} type="secondary">
-          Submit
-        </Button>
+        <Button type="secondary">Submit</Button>
       </div>
     </form>
   );
