@@ -1,4 +1,5 @@
 import ProductPlaceholder from "../../public/productImgPlacehodler.jpg";
+import { BASE_URL } from "../config/config";
 import { useProducts } from "../hooks";
 import Button from "./Button";
 
@@ -10,7 +11,7 @@ function ProductDetailCard({ product }) {
       <div className="w-40 h-40 overflow-hidden rounded-lg">
         <img
           className="object-cover w-full h-full"
-          src={product?.image_url}
+          src={`${BASE_URL}/${product?.image_url}`}
           onError={(e) => {
             e.target.onerror = null;
             e.target.src = ProductPlaceholder;
