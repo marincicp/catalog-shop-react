@@ -1,52 +1,53 @@
-import { createContext, useEffect, useState } from "react";
-import { BASE_URL } from "../config/config";
-import useFetchProducts from "../hooks/useFetchproducts";
-import toast from "react-hot-toast";
+import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQueryParams } from "../hooks";
+import { deleteProduct, getProducts } from "../services/productService";
+import { getCategories } from "../services/categoryService";
 
 export const ProductContext = createContext();
 
 export function ProductContextProvider({ children }) {
+  const { searchParams } = useQueryParams();
   const navigate = useNavigate();
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(false);
+  console.log(searchParams, "uuuu");
+  const { data: categories } = useQuery({
+    queryKey: ["categories"],
+    queryFn: getCategories,
+  });
 
-  const { products, isLoading, error } = useFetchProducts();
+  console.log(Object.fromEntries(searchParams), "entries");
+  const {
+    error,
+    data: products,
+    isLoading,
+  } = useQuery({
+    queryKey: ["products", searchParams.toString()],
+    queryFn: () => getProducts(Object.fromEntries(searchParams)),
+  });
 
-  async function handleDelete(sku) {
-    setLoading(true);
-    try {
-      const res = await fetch(`${BASE_URL}/products/${sku}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
+  const queryClient = useQueryClient();
+
+  const { isLoading: isDeleting, mutate: handleDelete } = useMutation({
+    mutationFn: deleteProduct,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["products"],
       });
-      if (!res.ok) {
-        throw new Error("Failed to delete product, please try again.");
-      }
-
-      toast.success("Product successfully deleted");
-    } catch (err) {
-      toast.error(err.message);
-    } finally {
-      setLoading(false);
       navigate("/");
-    }
-  }
+    },
+  });
 
-  useEffect(() => {
-    async function getData() {
-      const res = await fetch(`${BASE_URL}/categories`);
-      const { data } = await res.json();
-      setCategories(data);
-    }
-
-    getData();
-  }, []);
   return (
     <ProductContext.Provider
-      value={{ categories, products, error, isLoading, handleDelete, loading }}
+      value={{
+        categories,
+        products,
+        error,
+        isLoading,
+        handleDelete,
+        isDeleting,
+      }}
     >
       {children}
     </ProductContext.Provider>

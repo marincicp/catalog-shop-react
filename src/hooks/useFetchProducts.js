@@ -15,7 +15,7 @@ export default function useFetchProducts() {
     setError(null);
     abortControllerRef.current?.abort();
     abortControllerRef.current = new AbortController();
-
+    console.log(searchParams, "seat context😂");
     try {
       setIsLoading(true);
       const res = await fetch(`${BASE_URL}/products?${searchParams}`, {

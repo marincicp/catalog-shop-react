@@ -1,6 +1,6 @@
 function Dropdown({
   onChange,
-  data,
+  data = [],
   defaultOption = "All",
   defaultValue = "",
   value = "name",

@@ -4,7 +4,7 @@ import { useProducts } from "../hooks";
 import Button from "./Button";
 
 function ProductDetailCard({ product }) {
-  const { handleDelete, loading } = useProducts();
+  const { handleDelete, isDeleting } = useProducts();
 
   return (
     <div className=" w-3/6 rounded-xl p-6 flex flex-col justify-between  items-center gap-4 border-2 border-gray-200 hover:shadow-md transition-all duration-200 bg-gray-100 mt-4 ">
@@ -53,7 +53,7 @@ function ProductDetailCard({ product }) {
         <div className="flex justify-evenly mt-6">
           <Button
             onClick={() => handleDelete(product?.SKU)}
-            disabled={loading}
+            disabled={isDeleting}
             type="red"
           >
             Delete
