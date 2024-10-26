@@ -3,6 +3,7 @@ import { BASE_URL } from "../config/config";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import useProducts from "./useProducts";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function useEditProduct() {
   const navigate = useNavigate();
@@ -55,7 +56,7 @@ export default function useEditProduct() {
     }
     getData();
   }, []);
-
+  const queryClient = useQueryClient();
   async function handleSubmit(e) {
     setIsLoading(true);
     e.preventDefault();
@@ -80,6 +81,7 @@ export default function useEditProduct() {
       }
 
       toast.success("Product successfully edited");
+      queryClient.invalidateQueries({ queryKey: ["products"] });
       navigate(`/`);
     } catch (err) {
       toast.error(err.message);

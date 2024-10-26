@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
 
-function Button({ children, type = "primary", className = "", onClick, to }) {
+function Button({
+  children,
+  type = "primary",
+  className = "",
+  onClick,
+  to,
+  disabled,
+}) {
   const base =
-    "inline-block  text-sm py-2 px-4 rounded-lg tracking-wider transition-all duration-200 ";
+    "inline-block  text-sm py-2 px-4 rounded-lg tracking-wider transition-all duration-200  disabled:bg-slate-400";
 
   const styles = {
     primary:
@@ -21,14 +28,20 @@ function Button({ children, type = "primary", className = "", onClick, to }) {
 
   if (onClick) {
     return (
-      <button onClick={onClick} className={base + styles[type] + className}>
+      <button
+        disabled={disabled}
+        onClick={onClick}
+        className={base + styles[type] + className}
+      >
         {children}
       </button>
     );
   }
 
   return (
-    <button className={base + styles[type] + className}>{children}</button>
+    <button disabled={disabled} className={base + styles[type] + className}>
+      {children}
+    </button>
   );
 }
 

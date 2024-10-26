@@ -15,7 +15,9 @@ function FilterContainer() {
     handlePriceFilter,
     clearAllParms,
   } = useQueryParams();
+
   const { categories } = useProducts();
+
   const activeType = getQueryParam(paramsConstants.TYPE);
   return (
     <div className="bg-white">

@@ -2,9 +2,8 @@ import { Button, FilterContainer, ProductList, SearchBar } from "../components";
 import { useProducts, useQueryParams } from "../hooks";
 
 function Catalog() {
-  const { products, isLoading } = useProducts();
+  const { products, isLoading, error } = useProducts();
   const { handleInputChange, getQueryParam } = useQueryParams();
-
   const lastSearchQuery = getQueryParam("name") || "";
 
   return (
@@ -24,7 +23,7 @@ function Catalog() {
             </Button>
           </div>
         </div>
-        <ProductList data={products} isLoading={isLoading} />
+        <ProductList error={error} data={products} isLoading={isLoading} />
       </div>
     </div>
   );

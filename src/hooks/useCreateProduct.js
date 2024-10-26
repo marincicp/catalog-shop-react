@@ -3,6 +3,7 @@ import { formValidator } from "../utills/helpers";
 import { BASE_URL } from "../config/config";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function useCreateProduct() {
   const navigate = useNavigate();
@@ -17,6 +18,8 @@ export default function useCreateProduct() {
   function handleProductType(value) {
     setProductType(value);
   }
+
+  const queryClient = useQueryClient();
 
   async function handleSubmit(e) {
     setIsLoading(true);
@@ -43,6 +46,7 @@ export default function useCreateProduct() {
       }
 
       toast.success("Product successfully created");
+      queryClient.invalidateQueries({ queryKey: ["products"] });
       navigate("/");
     } catch (err) {
       toast.error(err.message);
