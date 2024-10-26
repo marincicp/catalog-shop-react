@@ -3,6 +3,7 @@ import { AppLayout } from "../components";
 import {
   About,
   Catalog,
+  PageNotFound,
   ProductCreate,
   ProductDetails,
   ProductEdit,
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
       {
         path: "/product-edit/:sku",
         element: <ProductEdit />,
+      },
+      {
+        path: "*",
+        element: <PageNotFound />,
       },
     ],
   },

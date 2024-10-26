@@ -16,7 +16,6 @@ export function ProductContextProvider({ children }) {
     queryFn: getCategories,
   });
 
-  console.log(Object.fromEntries(searchParams), "entries");
   const {
     error,
     data: products,

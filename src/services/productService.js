@@ -5,7 +5,6 @@ export async function getProducts(searchParams) {
   const query = new URLSearchParams(searchParams).toString();
 
   const res = await fetch(`${BASE_URL}/products?${query}`);
-  console.log(res, "rekkkkkkkk");
   if (!res.ok) {
     throw new Error(res?.statusText);
   }
@@ -32,7 +31,6 @@ export async function deleteProduct(sku) {
 }
 
 export async function findProduct(sku) {
-  console.log(sku, "ksu");
   try {
     const res = await fetch(`${BASE_URL}/products/${sku}`);
     const { data } = await res.json();
