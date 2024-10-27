@@ -10,7 +10,6 @@ export const ProductContext = createContext();
 export function ProductContextProvider({ children }) {
   const { searchParams } = useQueryParams();
   const navigate = useNavigate();
-  console.log(searchParams, "uuuu");
   const { data: categories } = useQuery({
     queryKey: ["categories"],
     queryFn: getCategories,

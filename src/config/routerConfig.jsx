@@ -3,10 +3,12 @@ import { AppLayout } from "../components";
 import {
   About,
   Catalog,
+  Login,
   PageNotFound,
   ProductCreate,
   ProductDetails,
   ProductEdit,
+  Register,
 } from "../pages";
 import { ProductContextProvider } from "../context/ProductContext";
 
@@ -31,6 +33,14 @@ export const router = createBrowserRouter([
       {
         path: "/product-create",
         element: <ProductCreate />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
       },
       {
         path: "/product/:sku",
