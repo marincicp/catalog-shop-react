@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { AppLayout } from "../components";
+import { AppLayout, ProtectedRoute } from "../components";
 import {
   About,
   Catalog,
@@ -32,7 +32,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/product-create",
-        element: <ProductCreate />,
+        element: (
+          <ProtectedRoute>
+            <ProductCreate />,
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/login",
@@ -48,7 +52,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/product-edit/:sku",
-        element: <ProductEdit />,
+        element: (
+          <ProtectedRoute>
+            <ProductEdit />,
+          </ProtectedRoute>
+        ),
       },
       {
         path: "*",

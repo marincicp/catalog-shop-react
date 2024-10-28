@@ -16,7 +16,9 @@ import TextareaInput from "./TextareaInput";
 import RadioInput from "./RadioInput";
 import ProductForm from "./ProductForm";
 import ProductDetailCard from "./ProductDetailCard";
+import ProtectedRoute from "./ProtectedRoute";
 export {
+  ProtectedRoute,
   ProductForm,
   RadioInput,
   TextareaInput,
