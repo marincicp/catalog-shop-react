@@ -1,10 +1,12 @@
 import ProductPlaceholder from "../../public/productImgPlacehodler.jpg";
 import { BASE_URL } from "../config/config";
 import { useProducts } from "../hooks";
+import { useUser } from "../hooks/useUser";
 import Button from "./Button";
 
 function ProductDetailCard({ product }) {
   const { handleDelete, isDeleting } = useProducts();
+  const { user } = useUser();
 
   return (
     <div className=" w-3/6 rounded-xl p-6 flex flex-col justify-between  items-center gap-4 border-2 border-gray-200 hover:shadow-md transition-all duration-200 bg-gray-100 mt-4 ">
@@ -50,18 +52,25 @@ function ProductDetailCard({ product }) {
             <ProductCardRow label="Description" value={product?.description} />
           )}
         </div>
-        <div className="flex justify-evenly mt-6">
-          <Button
-            onClick={() => handleDelete(product?.SKU)}
-            disabled={isDeleting}
-            type="red"
-          >
-            Delete
-          </Button>
-          <Button to={`/product-edit/${product?.SKU}`} type="secondary">
-            Edit
-          </Button>
-        </div>
+
+        {user?.id === product.user_id && (
+          <div className="flex justify-evenly mt-6">
+            <Button
+              onClick={() => handleDelete(product?.SKU)}
+              disabled={isDeleting || user?.id !== product.user_id}
+              type="red"
+            >
+              Delete
+            </Button>
+            <Button
+              disabled={user?.id !== product.user_id}
+              to={`/product-edit/${product?.SKU}`}
+              type="secondary"
+            >
+              Edit
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

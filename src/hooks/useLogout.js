@@ -7,7 +7,8 @@ export function useLogout() {
   const { mutate: logoutUser, isLoading } = useMutation({
     mutationFn: logoutService,
     onSuccess: () => {
-      queryClient.removeQueries(["user"]);
+      queryClient.invalidateQueries(["user"]);
+      queryClient.setQueryData(["user"], null);
     },
   });
 

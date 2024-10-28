@@ -1,10 +1,12 @@
 import { Button, FilterContainer, ProductList, SearchBar } from "../components";
 import { useProducts, useQueryParams } from "../hooks";
-
+import { useUser } from "../hooks/useUser";
 function Catalog() {
   const { products, isLoading, error } = useProducts();
   const { handleInputChange, getQueryParam } = useQueryParams();
   const lastSearchQuery = getQueryParam("name") || "";
+
+  const { user } = useUser();
 
   return (
     <div className="grid  grid-cols-[40%_1fr] md:grid-cols-[30%_1fr]  lg:grid-cols-[30%_1fr] xl:grid-cols-[20%_1fr]  ">
@@ -18,9 +20,11 @@ function Catalog() {
           />
 
           <div className="mr-4">
-            <Button to="/product-create" type="secondary">
-              Create product
-            </Button>
+            {user?.email && (
+              <Button to="/product-create" type="secondary">
+                Create product
+              </Button>
+            )}
           </div>
         </div>
         <ProductList error={error} data={products} isLoading={isLoading} />

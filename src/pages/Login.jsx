@@ -16,7 +16,7 @@ function Login() {
       return toast.error("Email and Password are required");
     }
 
-    login(Object.fromEntries(formData));
+    login({ email, password });
   }
 
   return (
@@ -26,7 +26,7 @@ function Login() {
           onSubmit={handleSubmit}
           className="bg-gray-200 py-8 rounded-xl w-2/5 flex flex-col items-center mt-8 p-4 "
         >
-          <h3 className="text-3xl font-bold mb-8">Log In</h3>
+          <h3 className="text-3xl font-bold mb-8">Welcome back!</h3>
           <TextInput name="email" type="email" label="Email" />
           <TextInput name="password" type="password" label="Password" />
 

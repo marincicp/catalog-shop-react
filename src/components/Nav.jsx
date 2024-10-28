@@ -15,7 +15,6 @@ function Nav() {
 
         {user?.email ? (
           <Button onClick={logoutUser} disabled={isLoading}>
-            {" "}
             Logout
           </Button>
         ) : (

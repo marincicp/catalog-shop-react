@@ -32,7 +32,11 @@ function Register() {
           <TextInput type="password" label="Password" name="password" />
 
           <div className="w-full px-4 mt-4">
-            <Button disabled={isLoading} type="secondary" className=" w-full">
+            <Button
+              disabled={isLoading}
+              type="secondary"
+              className=" w-full bg-blue-500 hover:bg-blue-800"
+            >
               Sign Up
             </Button>
           </div>

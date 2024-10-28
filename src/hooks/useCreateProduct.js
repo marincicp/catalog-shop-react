@@ -21,6 +21,7 @@ export default function useCreateProduct() {
 
   const queryClient = useQueryClient();
 
+  const user = queryClient.getQueryData(["user"]);
   async function handleSubmit(e) {
     setIsLoading(true);
     e.preventDefault();
@@ -29,6 +30,7 @@ export default function useCreateProduct() {
 
     formData.append("category_id", categoryId);
     formData.append("type", productType);
+    formData.append("user_id", user.id);
 
     const isValid = formValidator(Object.fromEntries(formData));
     if (!isValid) {
