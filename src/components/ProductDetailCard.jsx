@@ -27,21 +27,21 @@ function ProductDetailCard({ product }) {
           {product?.name}
         </p>
         <div className="flex justify-evenly mb-8">
-          <ProductCardRow label="Price" value={product?.price} />
+          <ProductCardRow label="Price" value={`$ ${product?.price}`} />
           <ProductCardRow label="Category" value={product?.category_name} />
         </div>
         <div className="flex justify-evenly">
           <ProductCardRow label="Type" value={product?.type} />
           {product?.type === "virtual" ? (
             <>
-              <ProductCardRow label="Coupon" value={product?.coupon_codes} />
+              <ProductCardRow label="Coupon" value={product?.coupon_code} />
               <ProductCardRow label="Expires At" value={product?.expires_at} />
             </>
           ) : (
             <>
               <ProductCardRow
-                label="Color"
-                value={`$  ${product?.shipping_prices}`}
+                label="Shipping Price"
+                value={`$  ${product?.shipping_price}`}
               />
               <ProductCardRow label="Color" value={product?.color} />
             </>

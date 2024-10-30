@@ -40,10 +40,10 @@ export default function useEditProduct() {
           price: data.price,
           description: data.description || "",
           sku: data.SKU,
-          coupon_code: data.coupon_codes || "",
+          coupon_code: data.coupon_code || "",
           expires_at: data.expires_at || "",
-          color: data.colors || "",
-          shipping_price: data.shipping_prices || "",
+          color: data.color || "",
+          shipping_price: data.shipping_price || "",
         });
 
         setProductType(data.type);
