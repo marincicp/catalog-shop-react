@@ -1,14 +1,14 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { logoutService } from "../services/authService";
+import { useAuthContext } from "./useAuthContext";
 
 export function useLogout() {
-  const queryClient = useQueryClient();
+  const { removeUser } = useAuthContext();
 
   const { mutate: logoutUser, isLoading } = useMutation({
     mutationFn: logoutService,
     onSuccess: () => {
-      queryClient.invalidateQueries(["user"]);
-      queryClient.setQueryData(["user"], null);
+      removeUser();
     },
   });
 

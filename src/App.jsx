@@ -12,7 +12,6 @@ const queryClient = new QueryClient({
   },
 });
 
-console.log(queryClient, "clinet");
 function App() {
   return (
     <QueryClientProvider client={queryClient}>

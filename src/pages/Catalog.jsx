@@ -1,12 +1,11 @@
 import { Button, FilterContainer, ProductList, SearchBar } from "../components";
-import { useProducts, useQueryParams } from "../hooks";
-import { useUser } from "../hooks/useUser";
+import { useAuthContext, useProducts, useQueryParams } from "../hooks";
 function Catalog() {
   const { products, isLoading, error } = useProducts();
   const { handleInputChange, getQueryParam } = useQueryParams();
   const lastSearchQuery = getQueryParam("name") || "";
 
-  const { user } = useUser();
+  const { user } = useAuthContext();
 
   return (
     <div className="grid  grid-cols-[40%_1fr] md:grid-cols-[30%_1fr]  lg:grid-cols-[30%_1fr] xl:grid-cols-[20%_1fr]  ">
