@@ -12,7 +12,6 @@ export async function registerService(data) {
 }
 
 export async function loginService(data) {
-  console.log(data, "service data");
   const res = await fetch(`${BASE_URL}/login`, {
     method: "POST",
     body: JSON.stringify(data),

@@ -1,10 +1,11 @@
 import { useLogout } from "../hooks/useLogout";
-import { useUser } from "../hooks/useUser";
 import Button from "./Button";
 import NavLinkItem from "./NavLinkItem";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 function Nav() {
-  const { user } = useUser();
+  const { user } = useAuthContext();
+
   const { logoutUser, isLoading } = useLogout();
 
   return (
@@ -15,7 +16,7 @@ function Nav() {
 
         {user?.email ? (
           <Button onClick={logoutUser} disabled={isLoading}>
-            Logout
+            {isLoading ? "Loading..." : "Logout"}
           </Button>
         ) : (
           <NavLinkItem label="Login" to="/login" />

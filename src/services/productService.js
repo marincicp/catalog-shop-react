@@ -4,7 +4,11 @@ import { BASE_URL } from "../config/config";
 export async function getProducts(searchParams) {
   const query = new URLSearchParams(searchParams).toString();
 
-  const res = await fetch(`${BASE_URL}/products?${query}`);
+  const res = await fetch(`${BASE_URL}/products?${query}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   if (!res.ok) {
     throw new Error(res?.statusText);
   }

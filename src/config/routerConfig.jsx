@@ -11,14 +11,17 @@ import {
   Register,
 } from "../pages";
 import { ProductContextProvider } from "../context/ProductContext";
+import { AuthContextProvider } from "../context/AuthContext";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <ProductContextProvider>
-        <AppLayout />
-      </ProductContextProvider>
+      <AuthContextProvider>
+        <ProductContextProvider>
+          <AppLayout />
+        </ProductContextProvider>
+      </AuthContextProvider>
     ),
     children: [
       {
