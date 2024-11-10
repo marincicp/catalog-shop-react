@@ -17,7 +17,10 @@ import RadioInput from "./RadioInput";
 import ProductForm from "./ProductForm";
 import ProductDetailCard from "./ProductDetailCard";
 import ProtectedRoute from "./ProtectedRoute";
+import Spinner from "./Spinner";
+
 export {
+  Spinner,
   ProtectedRoute,
   ProductForm,
   RadioInput,

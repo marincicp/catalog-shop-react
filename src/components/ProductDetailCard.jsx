@@ -1,12 +1,12 @@
 import ProductPlaceholder from "../../public/productImgPlacehodler.jpg";
 import { BASE_URL } from "../config/config";
-import { useProducts } from "../hooks";
-import { useUser } from "../hooks/useUser";
+import { useAuthContext, useProducts } from "../hooks";
 import Button from "./Button";
 
 function ProductDetailCard({ product }) {
   const { handleDelete, isDeleting } = useProducts();
-  const { user } = useUser();
+
+  const { user } = useAuthContext();
 
   return (
     <div className=" w-3/6 rounded-xl p-6 flex flex-col justify-between  items-center gap-4 border-2 border-gray-200 hover:shadow-md transition-all duration-200 bg-gray-100 mt-4 ">

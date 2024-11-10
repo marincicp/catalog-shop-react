@@ -1,17 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BASE_URL } from "../config/config";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import useProducts from "./useProducts";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { findProduct } from "../services/productService";
 
 export default function useEditProduct() {
   const navigate = useNavigate();
   const { sku } = useParams();
-  const [productData, setProductData] = useState(null);
-  const [categoryId, setCategoryId] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
 
+  const [categoryId, setCategoryId] = useState(1);
   const [productType, setProductType] = useState("");
 
   function handleCategoryChange(value) {
@@ -22,43 +21,24 @@ export default function useEditProduct() {
     setProductType(value);
   }
 
+  const { data: productData, isLoading } = useQuery({
+    queryKey: ["product", sku],
+    queryFn: () => findProduct(sku),
+    onSuccess: (data) => {
+      setProductType(data.type);
+      setCategoryId(data.category_id);
+    },
+
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
+
   const { categories } = useProducts();
-  useEffect(() => {
-    async function getData() {
-      setIsLoading(true);
-      try {
-        const res = await fetch(`${BASE_URL}/products/${sku}`);
-        const { data } = await res.json();
 
-        if (!res.ok) {
-          navigate("/");
-          throw new Error("Product not found");
-        }
-
-        setProductData({
-          name: data.name,
-          price: data.price,
-          description: data.description || "",
-          sku: data.SKU,
-          coupon_code: data.coupon_code || "",
-          expires_at: data.expires_at || "",
-          color: data.color || "",
-          shipping_price: data.shipping_price || "",
-        });
-
-        setProductType(data.type);
-        setCategoryId(data.category_id);
-      } catch (err) {
-        toast.error(err.message);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    getData();
-  }, []);
   const queryClient = useQueryClient();
   async function handleSubmit(e) {
-    setIsLoading(true);
+    // setIsLoading(true);
     e.preventDefault();
 
     const formData = new FormData(e.target);
@@ -86,7 +66,7 @@ export default function useEditProduct() {
     } catch (err) {
       toast.error(err.message);
     } finally {
-      setIsLoading(false);
+      // setIsLoading(false);
     }
   }
 

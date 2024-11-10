@@ -4,6 +4,7 @@ import { BASE_URL } from "../config/config";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
+import { useAuthContext } from "./useAuthContext";
 
 export default function useCreateProduct() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ export default function useCreateProduct() {
 
   const queryClient = useQueryClient();
 
-  const user = queryClient.getQueryData(["user"]);
+  const { user } = useAuthContext();
   async function handleSubmit(e) {
     setIsLoading(true);
     e.preventDefault();

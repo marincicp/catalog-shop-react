@@ -1,7 +1,7 @@
-import { ProductCard } from ".";
+import { ProductCard, Spinner } from ".";
 
 function ProductList({ data = [], isLoading, error }) {
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Spinner className="mt-6" />;
 
   if (error) return <div>No data to show</div>;
   return (
