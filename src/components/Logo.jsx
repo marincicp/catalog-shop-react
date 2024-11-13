@@ -1,4 +1,4 @@
-import Cart from "../../public/shopping-cart.svg";
+import Cart from "/shopping-cart.svg";
 
 function Logo() {
   return (
