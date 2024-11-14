@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useQueryParams } from "../hooks";
 import { deleteProduct, getProducts } from "../services/productService";
 import { getCategories } from "../services/categoryService";
+import toast from "react-hot-toast";
 
 export const ProductContext = createContext();
 
@@ -32,6 +33,12 @@ export function ProductContextProvider({ children }) {
       queryClient.invalidateQueries({
         queryKey: ["products"],
       });
+
+      toast.success("Product successfully deleted");
+      navigate("/");
+    },
+    onError: (err) => {
+      toast.error(err.message);
       navigate("/");
     },
   });

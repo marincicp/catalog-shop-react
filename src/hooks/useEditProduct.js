@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import useProducts from "./useProducts";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { findProduct } from "../services/productService";
+import { useAuthContext } from "./useAuthContext";
 
 export default function useEditProduct() {
   const navigate = useNavigate();
@@ -12,6 +13,8 @@ export default function useEditProduct() {
 
   const [categoryId, setCategoryId] = useState(1);
   const [productType, setProductType] = useState("");
+
+  const { user } = useAuthContext();
 
   function handleCategoryChange(value) {
     setCategoryId(value);
@@ -53,6 +56,7 @@ export default function useEditProduct() {
         method: "PUT",
         headers: {
           "Content-Type": "aplication/json",
+          Authorization: "Bearer " + user?.token,
         },
         body: JSON.stringify(formDataObj),
       });

@@ -16,22 +16,19 @@ export async function getProducts(searchParams) {
   return data;
 }
 
-export async function deleteProduct(sku) {
-  try {
-    const res = await fetch(`${BASE_URL}/products/${sku}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (!res.ok) {
-      throw new Error("Failed to delete product, please try again.");
-    }
-
-    toast.success("Product successfully deleted");
-  } catch (err) {
-    toast.error(err.message);
+export async function deleteProduct({ sku, token = "" }) {
+  const res = await fetch(`${BASE_URL}/products/${sku}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+  });
+  if (!res.ok) {
+    throw new Error("Failed to delete product, please try again.");
   }
+
+  return res.json();
 }
 
 export async function findProduct(sku) {

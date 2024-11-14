@@ -2,6 +2,7 @@ import ProductPlaceholder from "../../public/productImgPlacehodler.jpg";
 import { BASE_URL } from "../config/config";
 import { useAuthContext, useProducts } from "../hooks";
 import Button from "./Button";
+import { SpinnerMini } from "./index";
 
 function ProductDetailCard({ product }) {
   const { handleDelete, isDeleting } = useProducts();
@@ -56,11 +57,13 @@ function ProductDetailCard({ product }) {
         {user?.id === product.user_id && (
           <div className="flex justify-evenly mt-6">
             <Button
-              onClick={() => handleDelete(product?.SKU)}
+              onClick={() =>
+                handleDelete({ sku: product?.SKU, token: user?.token })
+              }
               disabled={isDeleting || user?.id !== product.user_id}
               type="red"
             >
-              Delete
+              {isDeleting ? <SpinnerMini label="Deleting" /> : "Delete"}
             </Button>
             <Button
               disabled={user?.id !== product.user_id}
