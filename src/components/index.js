@@ -18,8 +18,10 @@ import ProductForm from "./ProductForm";
 import ProductDetailCard from "./ProductDetailCard";
 import ProtectedRoute from "./ProtectedRoute";
 import Spinner from "./Spinner";
+import SpinnerMini from "./SpinnerMini";
 
 export {
+  SpinnerMini,
   Spinner,
   ProtectedRoute,
   ProductForm,
